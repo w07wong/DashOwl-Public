@@ -1,0 +1,13 @@
+sudo apt update
+sudo apt install openssh-server
+sudo apt-get install gnss-gpsd gpsd gpsd-clients
+sudo systemctl start qdsp-start.service
+
+sudo systemctl start gnss-gpsd.service
+export PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"
+sudo systemctl start qmi-gps-proxy.service
+gpsmon –n
+
+sudo apt install v4l-utils ffmpeg
+v4l2-ctl --list-formats-ext
+sudo apt install python3-opencv

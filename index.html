@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head profile="http://www.w3.org/2005/10/profile">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <!-- Datetime-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <!-- MongoDB -->
+    <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.0.0/stitch.js"></script>
+
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqD1Vp-pOHZuaHT1QKkOCpBlzJ-f28Dh0&libraries=places&callback=initAutocomplete" async defer></script>
+    
+    <!-- GCP -->
+    <script src="https://apis.google.com/js/client.js"></script>
+
+    <!-- MediaElementJS -->
+    <script src="mediaelement-and-player.min.js"></script>
+    <link rel="stylesheet" href="mediaelementplayer.css" />
+
+    <!-- ChartJS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="gcp.js"></script>
+
+    <title>DashOwl</title>
+    <link rel="icon" type="image/png" href="./owllogo.png">
+</head>
+
+<!-- <body onload="displayMetadataOnLoad()"> -->
+<body>
+    <hr />
+    <nav class="navbar navbar-expand-lg navbar-transparent">
+        <a class="navbar-item" href="#"><img id="menu-img" src="menu.svg" width="40" height="15"></a>
+        <a class="navbar-item" href="#">DASHBOARD</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <!-- <button type="submit" class="btn btn-primary pink-background" id="authorize-button" style="visibility: hidden onclick="displayMetadataOnLoad()">Authorize</button> -->
+            <!-- <a class="nav-item nav-link" href="#">Profile</a> -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="rounded left-side">
+        <p>DASHOWL</p>
+        <hr />
+        <p>Home</p>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col">
+                <div class="rounded" id="card">
+                    <form>
+                        <div class="form-group" id="location">
+                            <label for="Location1">Approximate Location</label>
+                            <input type="location" class="form-control" id="location-in" onFocus="geolocate()" placeholder="Enter Nearest Street Address">
+                            <small id="locationHelp" class="form-text text-muted">Enter approximate location of the incident.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="Date1">Date and Time</label>
+                            <input type="text" class="form-control" id="date-in" name="datetimes" placeholder="Enter Date and Time of Incident" />
+                            <small id="dateHelp" class="form-text text-muted">Enter date and time of the incident.</small>
+                        </div>
+                    </form>
+                    <!-- <button type="submit" class="btn btn-primary pink-background" onclick="returnFileURL('asdfa23343')">Submit</button> -->
+                    <button type="submit" class="btn btn-primary pink-background" onclick="displayMetadataOnLoad()">Submit</button>
+                    <!-- <button id="authorize-button" style="visibility: hidden">Authorize</button> -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <div class="rounded" id="card2">
+                    <table id="table_id" class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Location</th>
+                                <th>Day</th>
+                                <th>Time</th>
+                                <th>Crash Data</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mytablecontent">
+                                <!-- <td><button onclick="onVideoClickTest('https://giant.gfycat.com/NeedyCostlyCock.webm');">Video</button></td> -->
+                            <!-- Generate rows here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="popup">
+            <div class="col">
+                <div id="video_pop" onclick="onPopClick()"></div>
+            </div>
+            <div class="col">
+                <div class="rounded" id="card3">
+                    <ul id="car-statuses">
+                    </ul>
+                </div>
+                <canvas id="myChart" width="200" height="117"></canvas>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
